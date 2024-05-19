@@ -28,3 +28,55 @@ On the server-side, you can send an event to all connected clients or to a subse
 
 ### Multiplexing:
 Namespaces allow you to split the logic of your application over a single shared connection. This can be useful for example if you want to create an "admin" channel that only authorized users can join
+
+# TCP / UDP
+TCP and UDP are two core protocols of the internet Protocol Suite. They serve different purposes and have distinct characteristics suited for different types of network communication.
+
+## TCP
+    Transmission Control Protocol
+### Characteristics:
+- 1) Connection-oriented:
+    - TCP establishes a connection between the sender and receiver before data transmission begins. The connection maintained through the session.
+
+- 2) Reliable:
+    - TCP ensures reliable delivery of data. It uses acknowledgment to confirm that data has been received and retransmits lost packets.
+
+- 3) Ordered :
+    - TCP ensure that packets are delivered in the same order they were sent. If packets arrive out of order , TCP rearranges them before passing them to the application layer.
+
+- 4) Error Checking :
+    - TCP performs error-checking using checksums and ensures data integrity. If a packet is corrupted, it is retransmitted.
+- 5) Flow Control :
+    - TCP uses flow control mechanisms to prevent the sender from overwhelming the receiver with too much data at once.
+
+- 6) Congestion Control:
+    - TCP has built-in congestion control to avoid network congestion bty adjusting the rare of data transmission based on network.
+
+### Use Cases:
+- Web Browsing: Ensure that web pages are loaded completely and correctly.
+- Email: Reliable and ordered delivery  of emails .
+- File transfers: Ensures complete and accurate file transfers.
+
+## UDP
+User Datagram Protocol
+### Characteristics:
+- 1) Connectionless:
+    - UDP does not establish a connection before sending data. Each packets is sent independently.
+- 2) Unreliable:
+    - UDP does not guarantee delivery of packages. There are no acknowledgments, and lost packets are not retransmitted.
+- 3) No Order guarantee:
+    - The UDP does not guarantee that packets are delivered in order. Packets may arrive of order, or not all.
+- 4) Minimal Overhead:
+    - UDP has less overhead compared to TCP because it does not provide reliability, ordering, or flow control. This makes it faster and more efficient for certain applications.
+- 5) Error checking:
+    - UDP uses checking for error-checking, but if a packet is corrupted, it is simply discarded.
+
+### Use case UDP
+- Streaming Media: Video and audio streaming where some packet loss is acceptable, and low latency is crucial.
+- Online Gaming: Real-time multiplayer games where speed is more important than perfect delivery is crucial.
+
+##
+# Pre-Socket.IO
+
+## Transport Connection Protocol
+## Socket
