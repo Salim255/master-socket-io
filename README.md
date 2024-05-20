@@ -29,6 +29,62 @@ On the server-side, you can send an event to all connected clients or to a subse
 ### Multiplexing:
 Namespaces allow you to split the logic of your application over a single shared connection. This can be useful for example if you want to create an "admin" channel that only authorized users can join
 
+# Packets Layer
+    In networking, data is transmitted over network in the form of packets. These packets traverse through multiple layers of the OSI (Open System Interconnection) or TCP/IP model. Each layer has a specific function and adds its own header (and sometimes trailer) to the packets, encapsulating the data as it moves down the layers.
+
+## OSI Model Layers:
+### 1) Application Layer (Layer 7):
+#### Function 1:
+    Interfaces with the end-user and provides network services directly to applications. Examples HTTP, FTP, SMTP, and DNS
+
+#### Data Encapsulation 2:
+    Data (message or payload)
+
+### Presentation Layer (Layer 6) :
+#### Function 1 :
+    Translates, encrypts, and compress data for the application layer. Ensure that data is in readable format for the application.
+#### Data Encapsulation Data 2:
+    Data
+
+### Session Layer (Layer 5):
+#### Function 1:
+    Manages and control the connections between computers. Establishes, maintains, and terminates sessions.
+#### Data Encapsulation:
+    Data
+
+### Transport Layer (Layer 4):
+#### Function 1:
+    Provides reliable data transfer with error recovery and flow control. Ensures complete data transfer. Key protocols: TCP and UDP.
+
+#### Data Encapsulation 2:
+    Segment (TCP) or Datagram (UDP).
+
+#### Header Added 3:
+    Source and destination port numbers, sequence and acknowledgment numbers, error-checking data.
+
+### Network Layer (Layer 3):
+#### Function 1:
+    Determine the best physical path for data to travel from source to destination.
+#### Data Encapsulation 2:
+    Packet
+#### Headers Added 3:
+     Source and destination IP address, TTL (Time to Live), protocol type.
+
+### Data Link Layer (Layer 2):
+#### Function 1:
+     Handles the physical addressing and access to the physical medium. Ensures error-free transfer of data frames between nodes on the same network.
+#### Data Encapsulation 2:
+    Frame
+
+#### Headers Added 3:
+    MAC (Media Access Control) addresses, frame type, error-checking data (CRC)
+
+### Physical Layer (Layer 1):
+#### Function 1:
+    Transmits raw bitstreams over a physical medium such as cables, radio waves, or optical fibers. Defines the hardware equipment involved
+#### Data Encapsulation 2:
+    Bits
+
 # TCP / UDP
 TCP and UDP are two core protocols of the internet Protocol Suite. They serve different purposes and have distinct characteristics suited for different types of network communication.
 
@@ -58,7 +114,7 @@ TCP and UDP are two core protocols of the internet Protocol Suite. They serve di
 - File transfers: Ensures complete and accurate file transfers.
 
 ## UDP
-User Datagram Protocol
+    User Datagram Protocol
 ### Characteristics:
 - 1) Connectionless:
     - UDP does not establish a connection before sending data. Each packets is sent independently.
