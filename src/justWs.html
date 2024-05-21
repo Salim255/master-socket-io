@@ -1,0 +1,15 @@
+<script>
+    let ws = new WebSocket('ws://localhost:4555');
+
+    // When connection opened
+    ws.onopen = (event) => {
+        //console.log(event);
+        ws.send('Hello world, I am so excited')
+    }
+
+    // When we get a message from the other side
+    ws.onmessage = (message) => {
+        console.log(message.data);
+    }
+
+</script>
