@@ -1,0 +1,66 @@
+
+<div>
+    <form id="message-form">
+        <div>
+            <input type="text" placeholder="Enter your message" id="myInput"/>
+        </div>
+        <div>
+            <input class="btn" type="submit" value="Send!"/>
+        </div>
+    </form>
+
+    <ul id="messages">
+
+    </ul>
+</div>
+
+<script src="socket.io/socket.io.js">
+</script>
+
+<script >
+    // This is the browser socket connection to our socket.io server that running in node
+    const socket = io('http://localhost:8666');
+
+    socket.on('connect', () => {
+        console.log('Hello from connection');
+    });
+
+    socket.emit('messageFromClient', {data: 'Hello From server'});
+
+    socket.on('messageFromServer', (data) => {
+        console.log(data);
+    });
+
+    const inputElement = document.getElementById('myInput');
+    const messageForm = document.getElementById('message-form');
+
+    // Add an event listener for the input
+    inputElement.addEventListener('input', (event) => {
+        const inputValue = event.target.value;
+        console.log(inputValue);
+        if (inputValue) {
+            socket.emit('typing');
+        }
+    });
+
+   messageForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const newMessage = inputElement.value
+    console.log(newMessage);
+
+    if (newMessage) {
+        socket.emit('new-message', {newMessage });
+    }
+
+    }
+
+    );
+
+    socket.on('newMessageToClients', (message) => {
+        console.log(message);
+        if (message.text) {
+            document.querySelector('#messages').innerHTML += `<li>${message.text}</li>`
+        }
+    })
+</script>
