@@ -1,0 +1,25 @@
+<!-- Socket.io.js is added by the socketio server (The fact that we have socket.io running in the server, that makes our socket.io object available here, or in the global scope in general  🕺) -->
+<script src="/socket.io/socket.io.js">
+
+</script>
+
+<script>
+    /* Socket.io.js is going to add the io object into the global scope (WINDOW) */
+
+    const socket = io('http://localhost:4555');
+
+    //console.log(socket);
+    socket.on('connect', () =>  {
+        console.log('====================================');
+        console.log('Hello world , we are connected', socket.id, new Date());
+        console.log('====================================');
+    })
+
+    socket.on('messageFromSalim', (data) => {
+
+        console.log(data);
+
+    });
+    socket.emit('messageFromClient', {data: 'Hello from the browser 🕺🕺'});
+// So in the browser we are interacting with the browser socket
+</script>
