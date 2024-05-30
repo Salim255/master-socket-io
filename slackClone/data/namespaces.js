@@ -1,18 +1,22 @@
+const Namespace = require('../classes/Namespace');
+const Room = require('../classes/Room');
 
-const wikiNs = {
-    name: '/wiki',
-    image: "https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Wikipedia-logo-v2.svg/103px-Wikipedia-logo-v2.svg.png"
-}
+const wikiNs = new Namespace(0, 'Wikipedia',"https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Wikipedia-logo-v2.svg/103px-Wikipedia-logo-v2.svg.png", '/wiki' );
+wikiNs.addRoom(new Room(0, 'New Articles', 0));
+wikiNs.addRoom(new Room(1, 'Editor', 0 ));
+wikiNs.addRoom(new Room(2, 'Other', 0 ));
 
-const mozNs = {
-    name: '/mozilla',
-    image: "https://www.mozilla.org/media/img/logos/firefox/logo-quantum.9c5e96634f92.png"
-}
+const mozNs = new Namespace(1, 'Mozilla',  "https://www.mozilla.org/media/img/logos/firefox/logo-quantum.9c5e96634f92.png", '/mozilla' ) ;
+mozNs.addRoom(new Room(0, 'Firefox', 1));
+mozNs.addRoom(new Room(1,'SeaMonkey', 1));
+mozNs.addRoom(new Room(2,'SpiderMonkey', 1));
+mozNs.addRoom(new Room(3, 'Rust', 1));
 
-const linuxNs = {
-    name: '/linux',
-    image: "https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png"
-}
+const linuxNs = new Namespace(2, 'Linux', "https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png", '/linux');
+linuxNs.addRoom(0,'Bebian' , 2);
+linuxNs.addRoom(1,'Red Hat' , 2);
+linuxNs.addRoom(2,'Ubuntu' , 2);
+linuxNs.addRoom(3,'Mac OS' , 2);
 
 const namespaces = [wikiNs, mozNs, linuxNs];
 
