@@ -13,10 +13,10 @@ mozNs.addRoom(new Room(2,'SpiderMonkey', 1));
 mozNs.addRoom(new Room(3, 'Rust', 1));
 
 const linuxNs = new Namespace(2, 'Linux', "https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png", '/linux');
-linuxNs.addRoom(0,'Bebian' , 2);
-linuxNs.addRoom(1,'Red Hat' , 2);
-linuxNs.addRoom(2,'Ubuntu' , 2);
-linuxNs.addRoom(3,'Mac OS' , 2);
+linuxNs.addRoom(new Room(0,'Bebian' , 2));
+linuxNs.addRoom(new Room(1,'Red Hat' , 2));
+linuxNs.addRoom(new Room(2,'Ubuntu' , 2));
+linuxNs.addRoom(new Room(3,'Mac OS' , 2));
 
 const namespaces = [wikiNs, mozNs, linuxNs];
 
