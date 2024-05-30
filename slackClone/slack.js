@@ -2,6 +2,8 @@ const express = require('express');
 const socketio  = require('socket.io');
 const app = express();
 
+const namespaces = require('./data/namespaces')
+
 app.use(express.static(__dirname + '/public'));
 
 const PORT = 9000;
@@ -17,6 +19,8 @@ io.on('connect', (socket) => {
     socket.emit('Welcome', 'Welcome to the socket server 👯‍♀️👯‍♀️');
     socket.on('clientConnect', () => {
         console.log(socket.id, "has connected");
-    })
+    });
+
+    socket.emit('nsList', namespaces)
 });
 
