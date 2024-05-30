@@ -21,6 +21,6 @@ io.on('connect', (socket) => {
         console.log(socket.id, "has connected");
     });
 
-    socket.emit('nsList', namespaces)
+    socket.emit('nsList', namespaces);
 });
 
