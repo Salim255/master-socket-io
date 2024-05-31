@@ -64,4 +64,8 @@
             document.querySelector('#messages').innerHTML += `<li>${message.text}</li>`
         }
     })
+
+    adminSocket.on('connect', () =>  {
+        console.log('Successfully joined admin namespace!');
+    })
 </script>
