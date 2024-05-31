@@ -32,6 +32,10 @@
         console.log(data);
     });
 
+    socket.on('welcomeToChatRoom', (data) => {
+        console.log("Welcome to the main chat room");
+    })
+
     const inputElement = document.getElementById('myInput');
     const messageForm = document.getElementById('message-form');
 

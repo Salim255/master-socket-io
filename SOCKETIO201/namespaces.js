@@ -13,22 +13,26 @@ const io = socketio(expressServer);
 
 // connect or connection
 io.of('/').on('connect', (socket) => {
-io.of('/admin').emit('userJoinedMainNS', "");
-console.log(socket.id, "has connected");
-    socket.emit('messageFromServer', {data: 'Welcome to the socket server 👯‍♀️👯‍♀️'});
-    socket.on('messageFromClient', (data) => {
-        console.log(data);
-    });
+    socket.join('chat');
+    io.of('/').to('chat').emit('welcomeToChatRoom', {});
 
-    socket.on('typing', () =>  {
-        console.log('User is typing...');
-    });
+    io.of('/admin').emit('userJoinedMainNS', "");
 
-    socket.on('new-message', (data) => {
-        console.log(data);
+    console.log(socket.id, "has connected");
+        socket.emit('messageFromServer', {data: 'Welcome to the socket server 👯‍♀️👯‍♀️'});
+        socket.on('messageFromClient', (data) => {
+            console.log(data);
+        });
 
-        io.emit('newMessageToClients', {text: data.newMessage})
-    })
+        socket.on('typing', () =>  {
+            console.log('User is typing...');
+        });
+
+        socket.on('new-message', (data) => {
+            console.log(data);
+
+            io.emit('newMessageToClients', {text: data.newMessage})
+        })
 })
 
 io.of('/admin').on('connect', (socket) => {
