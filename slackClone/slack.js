@@ -3,6 +3,7 @@ const socketio  = require('socket.io');
 const app = express();
 
 const namespaces = require('./data/namespaces')
+const Room = require('./classes/Room')
 
 app.use(express.static(__dirname + '/public'));
 
@@ -12,6 +13,16 @@ const expressServer  = app.listen(PORT, () =>  {
 });
 
 const io = socketio(expressServer);
+
+// Manufactured way to change a namespace (without building a huge UI)
+app.get('/change-ns', (req, res) => {
+    // Update the namespaces array
+    namespaces[0].addRoom(new Room(0, 'Deleted', 0));
+
+    // Let everyone knows that this namespace has changed
+    io.of(namespaces[0].endpoint).emit('nsChange', namespaces[0])
+    res.json(namespaces[0])
+})
 
 // connect or connection
 io.on('connect', (socket) => {
