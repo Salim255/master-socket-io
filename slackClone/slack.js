@@ -24,3 +24,8 @@ io.on('connect', (socket) => {
     socket.emit('nsList', namespaces);
 });
 
+namespaces.forEach(namespace => {
+    io.of(namespace.endpoint).on('connect', (socket) => {
+        console.log(`${socket.id} has connected to `,namespace.endpoint);
+    })
+})
