@@ -37,6 +37,15 @@ io.on('connect', (socket) => {
 
 namespaces.forEach(namespace => {
     io.of(namespace.endpoint).on('connect', (socket) => {
-        console.log(`${socket.id} has connected to `,namespace.endpoint);
+        //console.log(`${socket.id} has connected to `,namespace.endpoint);
+        socket.on('joinRoom', (roomName) => {
+            // Need to fetch the history
+
+
+            // Join the room!
+            // Note , roomName is coming from the client. Which is not safe.
+            // Auth to make sure that the user has the right to join room
+            socket.join(roomName)
+        })
     })
 })
