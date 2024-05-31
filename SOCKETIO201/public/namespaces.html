@@ -20,6 +20,7 @@
 <script >
     // This is the browser socket connection to our socket.io server that running in node
     const socket = io('http://localhost:8666');
+    const adminSocket = io('http://localhost:8666/admin');
 
     socket.on('connect', () => {
         console.log('Hello from connection');
