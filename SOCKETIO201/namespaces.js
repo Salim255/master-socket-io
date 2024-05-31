@@ -13,6 +13,7 @@ const io = socketio(expressServer);
 
 // connect or connection
 io.of('/').on('connect', (socket) => {
+io.of('/admin').emit('userJoinedMainNS', "");
 console.log(socket.id, "has connected");
     socket.emit('messageFromServer', {data: 'Welcome to the socket server 👯‍♀️👯‍♀️'});
     socket.on('messageFromClient', (data) => {
