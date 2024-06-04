@@ -38,14 +38,29 @@ io.on('connect', (socket) => {
 namespaces.forEach(namespace => {
     io.of(namespace.endpoint).on('connect', (socket) => {
         //console.log(`${socket.id} has connected to `,namespace.endpoint);
-        socket.on('joinRoom', (roomName) => {
+        socket.on('joinRoom', async (roomName, ackCB) => {
             // Need to fetch the history
 
-
+            // Leave all rooms (except own room), because the client can only be in one room.
+            const rooms = socket.rooms;
+            let i = 0 ;
+            rooms.forEach(room => {
+                // We don't want to leave the socket's personal room, which is guaranteed to be first;
+                if (i !== 0) {
+                    socket.leave(room);
+                }
+                i++;
+            })
             // Join the room!
             // Note , roomName is coming from the client. Which is not safe.
             // Auth to make sure that the user has the right to join room
-            socket.join(roomName)
+            socket.join(roomName);
+            // Fetch the number of sockets (users) in this room
+            const sockets = await io.of(namespace.endpoint).in(roomName).fetchSockets();
+            const socketCount =  sockets.length;
+            ackCB({
+                numUsers: socketCount
+            })
         })
     })
 })
