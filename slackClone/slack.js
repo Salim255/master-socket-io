@@ -33,6 +33,8 @@ io.on('connect', (socket) => {
     });
 
     socket.emit('nsList', namespaces);
+
+
 });
 
 namespaces.forEach(namespace => {
@@ -61,6 +63,20 @@ namespaces.forEach(namespace => {
             ackCB({
                 numUsers: socketCount
             })
+        });
+
+        socket.on('newMessageToRoom',  (messageObj) => {
+            console.log(messageObj);
+
+            // The sever now has to broadcast this to all connected clients to this room only
+
+            // How we can find out what room THIS socket is in ?
+            const rooms = socket.rooms;
+            const currentRoom = [...rooms][1] // This is aset!! Not array;
+
+            // Send Out this messageObj to everyone including the sender
+            io.of(namespace.endpoint).in(currentRoom).emit('messageToRoom', messageObj);
+
         })
     })
 })
